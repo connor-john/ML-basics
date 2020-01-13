@@ -1,5 +1,6 @@
 # Machine Learning Collection
  A collection of materials/templates for machine learning learnt from either work of self-projects/self-study </br>
+ ... Just for fun 
 
 ### In progress
  - Machine Learning A-Z: Hands-On Python & R in Data Science (Udemy)
