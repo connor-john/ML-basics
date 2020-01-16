@@ -13,4 +13,4 @@
  - Practical Deep Learning for Coders (fast.ai)
  - Implement GAN ([paper](https://arxiv.org/abs/1406.2661))
  - Implement MaskGAN ([paper](https://arxiv.org/abs/1801.07736))
- - Learn Neural-Symbolic Integration ([lectures](http://www.neural-symbolic.org/)) *looks really cool*
+ - Learn Neural-Symbolic Integration ([lectures](http://www.neural-symbolic.org/) + [paper](https://arxiv.org/abs/1905.06088)) *looks really cool*
