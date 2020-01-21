@@ -1,5 +1,5 @@
 # Machine Learning Collection
- A collection of materials/templates for machine learning learnt from either work of self-projects/self-study </br>
+ A collection of materials/templates for machine learning learnt from either work, personal-projects or self-study </br>
  ... Just for fun 
 
 ### In progress
