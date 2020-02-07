@@ -40,15 +40,18 @@ X_test = sc.transform(X_test)
 # Setting up Keras
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.layers import Dropout
 
 # Initialise ANN
 classifier = Sequential()
 
-# Adding Input layers and hidden layers
+# Adding Input layers and hidden layers (with Dropout)
 classifier.add(Dense(6, kernel_initializer='random_uniform', activation = 'relu', input_shape = (11,)))
+classifier.add(Dropout(p = 0.1))
 
 # Add a hidden layer
 classifier.add(Dense(6, kernel_initializer='random_uniform', activation = 'relu'))
+classifier.add(Dropout(p = 0.1))
 
 # Add Output Layer
 classifier.add(Dense(1, kernel_initializer='random_uniform', activation = 'sigmoid'))
@@ -63,6 +66,67 @@ classifier.fit(X_train, y_train, batch_size = 10, epochs = 100)
 y_pred = classifier.predict(X_test)
 y_pred = (y_pred > 0.5)
 
+# Taking in a new input prediction
+new_prediction = classifier.predict(sc.transform(np.array([[0, 0, 600, 1, 40, 3, 60000, 2, 1, 1, 50000]])))
+new_prediction = (new_prediction > 0.5)
+
 # Making the Confusion Matrix
 from sklearn.metrics import confusion_matrix
 cm = confusion_matrix(y_test, y_pred)
+
+# Evaluating the model
+from keras.wrappers.scikit_learn import KerasClassifier 
+from sklearn.model_selection import cross_val_score
+def build_classifier():
+    classifier = Sequential()
+    classifier.add(Dense(6, kernel_initializer='random_uniform', activation = 'relu', input_shape = (11,)))
+    classifier.add(Dense(6, kernel_initializer='random_uniform', activation = 'relu'))
+    classifier.add(Dense(1, kernel_initializer='random_uniform', activation = 'sigmoid'))
+    classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
+    return classifier
+
+classifier = KerasClassifier(build_fn = build_classifier, batch_size = 10, epochs = 100)
+accuracies = cross_val_score(estimator = classifier, X = X_train, y = y_train, cv = 10, n_jobs = 1)
+mean = accuracies.mean()
+variance = accuracies.std()
+
+# Tuning the model
+from keras.wrappers.scikit_learn import KerasClassifier 
+from sklearn.model_selection import GridSearchCV
+from keras.models import Sequential
+from keras.layers import Dense
+def build_classifier(optimizer):
+    classifier = Sequential()
+    classifier.add(Dense(6, kernel_initializer='random_uniform', activation = 'relu', input_shape = (11,)))
+    classifier.add(Dense(6, kernel_initializer='random_uniform', activation = 'relu'))
+    classifier.add(Dense(1, kernel_initializer='random_uniform', activation = 'sigmoid'))
+    classifier.compile(optimizer = optimizer, loss = 'binary_crossentropy', metrics = ['accuracy'])
+    return classifier
+
+classifier = KerasClassifier(build_fn = build_classifier)
+parameters = {'batch_size': [25, 32],
+              'epochs': [100, 500],
+              'optimizer': ['adam', 'rmsprop']}
+grid_search = GridSearchCV(estimator = classifier, param_grid = parameters, scoring = 'accuracy', cv = 10)
+grid_search = grid_search.fit(X_train, y_train)
+best_param = grid_search.best_params_
+best_acc = grid_search.best_score_
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
