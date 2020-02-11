@@ -42,7 +42,7 @@ classifier.add(Dense(1, activation = 'sigmoid'))
 classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
 # Image Pre-Processing
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 train_datagen = ImageDataGenerator(
         rescale=1./255,
@@ -73,10 +73,11 @@ classifier.fit_generator(
         workers = 4
         )
 
+print('Model finished')
 
 # Making a prediction
 import numpy as np
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing import image
 test_image = image.load_img(file_path + 'dataset/single_prediction/cat_or_dog_1.jpg', target_size=(64, 64))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
@@ -87,6 +88,7 @@ if result[0][0] == 1:
 else:
     prediction = 'Cat'
 
+print('The prediction was ' + prediction)
 
 
 
