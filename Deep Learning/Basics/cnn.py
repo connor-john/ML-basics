@@ -3,16 +3,20 @@
 Created on Thu Jan 30 19:54:34 2020
 
 @author: Connor
+@environment: GPU
 """
 
 # Convolutional Neural Network
 
 # Importing
-from keras.models import Sequential
-from keras.layers import Convolution2D
-from keras.layers import MaxPooling2D
-from keras.layers import Flatten
-from keras.layers import Dense
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Convolution2D
+from tensorflow.keras.layers import MaxPooling2D
+from tensorflow.keras.layers import Flatten
+from tensorflow.keras.layers import Dense
+
+#Change file path root
+file_path = ''
 
 # Initialise the CNN
 classifier = Sequential()
@@ -49,13 +53,13 @@ train_datagen = ImageDataGenerator(
 test_datagen = ImageDataGenerator(rescale=1./255)
 
 training_set = train_datagen.flow_from_directory(
-        'dataset/training_set',
+        file_path + 'dataset/training_set',
         target_size=(64, 64),
         batch_size=40,
         class_mode='binary')
 
 test_set = test_datagen.flow_from_directory(
-        'dataset/test_set',
+        file_path + 'dataset/test_set',
         target_size=(64, 64),
         batch_size=40,
         class_mode='binary')
@@ -73,7 +77,7 @@ classifier.fit_generator(
 # Making a prediction
 import numpy as np
 from keras.preprocessing import image
-test_image = image.load_img('dataset/single_prediction/cat_or_dog_1.jpg', target_size=(64, 64))
+test_image = image.load_img(file_path + 'dataset/single_prediction/cat_or_dog_1.jpg', target_size=(64, 64))
 test_image = image.img_to_array(test_image)
 test_image = np.expand_dims(test_image, axis = 0)
 result = classifier.predict(test_image)
