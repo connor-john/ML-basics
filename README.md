@@ -1,6 +1,10 @@
 # Machine Learning Collection
  A collection of materials/templates for machine learning learnt from either work, personal-projects or self-study </br>
  ... Just for fun 
+ 
+### Current Environment
+Using keras-gpu and standard keras on windows . *GPU environment will be specified when used - code will vary*
+
 
 ### In progress
  - Deep Learning A-Z: Hands-On Artificial Neural Networks (Udemy)
