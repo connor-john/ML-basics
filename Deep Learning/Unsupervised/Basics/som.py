@@ -9,7 +9,6 @@ Created on Mon Feb 24 20:07:13 2020
 
 # Import libraries
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset (Using UCI Machine learning Repository)
@@ -29,3 +28,26 @@ learning_rate = 0.5
 som = MiniSom(x = 10, y = 10, input_len = np.size(X, 1), sigma = sigma, learning_rate = learning_rate)
 som.random_weights_init(X)
 som.train_random(data = X, num_iteration = 100)
+
+# Visualising results
+from pylab import bone, pcolor, colorbar, plot, show
+bone()
+pcolor(som.distance_map().T)
+colorbar()
+markers = ['o', 's']
+colors = ['r', 'g']
+for i, x in enumerate(X):
+    w = som.winner(x)
+    plot(w[0] + 0.5,
+         w[1] + 0.5,
+         markers[y[i]],
+         markeredgecolor = colors[y[i]],
+         markerfacecolor = 'None',
+         markersize = 10,
+         markeredgewidth = 2)
+show()
+
+# Finding Frauds
+mappings = som.win_map(X)
+frauds = mappings[(8, 2)]
+frauds = sc.inverse_transform(frauds)
