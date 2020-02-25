@@ -17,6 +17,7 @@ Using keras-gpu and standard keras on windows . *GPU environment will be specifi
  - Implement GAN ([paper](https://arxiv.org/abs/1406.2661))
  - Implement MaskGAN ([paper](https://arxiv.org/abs/1801.07736))
  - Learn Neural-Symbolic Integration ([lectures](http://www.neural-symbolic.org/) + [paper](https://arxiv.org/abs/1905.06088)) *looks really cool*
+ - Implement Neural Style Transfer ([paper](https://arxiv.org/abs/1508.06576)) 
 
 ### Completed
  - Machine Learning A-Z: Hands-On Python & R in Data Science (Udemy)
