@@ -3,4 +3,4 @@
  ... Just for fun 
  
 ### Update
-All Deep Learning material has been moved to it's own [repo](https://github.com/cjrTaylor/DL-collections)
+All Deep Learning material has been moved to it's own [repo](https://github.com/connor-john/DL-collections)
